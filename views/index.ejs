@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ScoreCard</title>
+        <link rel = "stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class = "container"></div>
+            <div class = "top">
+                <div class = "battTable">
+                    <form action = "/" method="POST">
+                        <input type = "text" name="batName">
+                        <input type = "submit" name = "batSubmit" value="Add Batsman">
+                    </form>
+
+                  <table border="1">
+                        <tr>
+                            <th>Num</th>
+                            <th style = "width: 30%" align = "left">NAME</th>
+                            <th>6</th>
+                            <th>5</th>
+                            <th>4</th>
+                            <th>3</th>
+                            <th>2</th>
+                            <th>1</th>
+                            <th>0</th>
+                            <th>HowOut</th>
+                            <th>RUNS</th>
+                        </tr> 
+
+                       
+                        <% for(let i=0; i<playersCount[0]; i++) { %>
+                            <tr class = <%= "batRow"+i %> >
+                                <% for(var key in batting[i]){
+                                    if(key != '_id'  ) { %>
+                                            <td>
+                                                <%= batting[i][key] %>
+                                            </td>
+                                    <% } %>
+                                <% } %>
+                            </tr>
+
+                        <% } %>
+                            
+                    </table> 
+                </div>
+
+                <div class = "bowlTable">
+                    <form action = "/" method="POST">
+                        <input type = "text" name="bowlName">
+                        <input type = "submit" name = "bowlSubmit" value="Add Bowler">
+                    </form>
+
+                    <form action = "/" method="POST">
+                        <select name ="selectBowler">
+                            <% for(var i=0; i<playersCount[1]; i++){ %>
+                                        <option>
+                                            <%= bowling[i]['name'] %>
+                                        </option>
+                            <% } %>
+                        </select>
+                       <input type = "submit" name="selectBowlerSubmit" value="Select Bowler">
+                    </form>
+
+                    <table border="1">
+                        <tr>
+                            <th>Num</th>
+                            <th style = "width: 30%" align = "left">NAME</th>
+                            <th>O</th>
+                            <th>M</th>
+                            <th>R</th>
+                            <th>W</th>
+                            <th>E</th>
+                        </tr> 
+
+                       
+                        <% for(var i=0; i<playersCount[1]; i++) { %>
+                            <tr class = <%= "bowlRow"+i %> >
+                                <% for(var key in bowling[i]){
+                                    if(key != '_id'  && key != 'balls') { %>
+                                            <td>
+                                                <%= bowling[i][key] %>
+                                            </td>
+                                    <% } %>
+                                <% } %>
+                            </tr>
+
+                        <% } %>
+                            
+                    </table> 
+                </div>
+            </div>
+
+            <div class = "bottom">
+                <div class = "score">
+                    <form action = "/" method="POST">
+                        <p>Runs Scored:</p>
+                        <select name = "runs">
+                            <option value = "6">6</option>
+                            <option value = "4">4</option>
+                            <option value = "3">3</option>
+                            <option value = "2">2</option>
+                            <option value = "1">1</option>
+                        </select>
+                        <p>Extras:</p>
+                        <select name = "extras">
+                            <option value = "none">None</option>
+                            <option value = "wide">Wide</option>
+                            <option value = "no">No</option>
+                            <option value = "bye">Bye</option>
+                            <option value = "leg-bye">Leg Bye</option>
+                        </select>
+
+                        <input type = "submit" name="runSubmit">
+                    </form>
+                </div>
+
+                <div class = "extras">
+
+                        EXTRAS
+                </div> 
+
+            </div>
+        </div>
+    </body>
+
+    
+    <script>
+         let striker = "batRow"+ <%= currBatsmen[0] %> ;
+         let nonStriker = "batRow"+ <%= currBatsmen[1] %> ;
+         let currBowler = "bowlRow" + <%= currBowler %>;
+         document.getElementsByClassName(striker)[0].style.background = "blue";
+         document.getElementsByClassName(nonStriker)[0].style.background = "red";
+         document.getElementsByClassName(currBowler)[0].style.background = "yellow";
+    
+    </script>
+</html>

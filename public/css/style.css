@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.container{
+    display:flex;
+    flex-direction: column;
+}
+
+.top, .bottom{
+    display: flex;
+    flex-direction: row;
+}
+
+.battTable, .bowlTable, .score, .extras{
+    height: 50vh;
+    width: 50vw;
+    z-index: 99;
+}
+
+.extras{
+    background: green;
+}
+
+
